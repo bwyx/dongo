@@ -1,0 +1,6 @@
+[submodule "web"]
+	path = web
+	url = https://github.com/bwyx/dongo-web
+[submodule "api"]
+	path = api
+	url = https://github.com/bwyx/dongo-api
