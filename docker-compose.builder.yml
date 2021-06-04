@@ -17,6 +17,6 @@ services:
       service: base
     command: >
       sh -c "
-        cd /@api && npm build &&
-        cd /@web && npm build
+        cd /@api && npm run build &&
+        cd /@web && npm run build
       "
