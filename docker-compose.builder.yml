@@ -1,0 +1,22 @@
+services:
+  base:
+    image: node:16-alpine
+    volumes:
+      - ./api:/@api
+      - ./web:/@web
+  install:
+    extends:
+      service: base
+    command: >
+      sh -c "
+        cd /@api && npm i &&
+        cd /@web && npm i
+      "
+  build:
+    extends:
+      service: base
+    command: >
+      sh -c "
+        cd /@api && npm build &&
+        cd /@web && npm build
+      "
