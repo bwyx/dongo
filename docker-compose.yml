@@ -28,6 +28,7 @@ services:
         fi
       "
     environment:
+      TAILWIND_TOUCH_DIR: /@web/.tailwindcss
       NODE_ENV: ${APP_ENV:-production}
       APP_PORT: ${APP_PORT}
     volumes:
@@ -48,10 +49,23 @@ services:
       NODE_ENV: ${APP_ENV:-production}
       PORT: ${API_PORT}
       MONGODB_URL: "mongodb://mongodb:27017/${DB_DATABASE}"
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ACCESS_EXPIRATION_MINUTES: ${JWT_ACCESS_EXPIRATION_MINUTES}
+      JWT_REFRESH_EXPIRATION_DAYS: ${JWT_REFRESH_EXPIRATION_DAYS}
+      JWT_RESET_PASSWORD_EXPIRATION_MINUTES: ${JWT_RESET_PASSWORD_EXPIRATION_MINUTES}
+      JWT_VERIFY_EMAIL_EXPIRATION_MINUTES: ${JWT_VERIFY_EMAIL_EXPIRATION_MINUTES}
+    ports:
+      - "5000:5000"
     volumes:
       - ./api:/@api
 
   mongodb:
     image: mongo:4.4
+    ports:
+      - "27017:27017"
     volumes:
-      - ~/.mongodb:/var/lib/mongodb
+      - mongodb:/var/lib/mongodb
+
+volumes:
+  mongodb:
+    driver: local
